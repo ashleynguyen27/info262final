@@ -1,41 +1,66 @@
 #include <Adafruit_NeoPixel.h>
 
-#define LED_PIN    7 
+#define LED_PIN    8
 #define LED_COUNT  15
 
 
-int fsrPin1 = A0;
-int fsrPin2 = A1;
-int hePin1 = 7;
-int fsrValue1 = 0;
-int fsrValue2 = 0;
-int heValue1 = 7;
-Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+//int fsrPin1 = A0;
+//int fsrValue1 = 0;
+int hePin1 = 2, hePin2 = 3, hePin3 = 4, hePin4 = 5;
+int heValue1 = 0, heValue2 = 0, heValue3 = 0, heValue4 = 0;
+Adafruit_NeoPixel strip1(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip2(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip3(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip4(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+
 
 void setup() {
   Serial.begin(9600);
-  strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
-  strip.show();
+  strip1.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+  strip1.show();
+  strip2.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+  strip2.show();
+  strip3.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+  strip3.show();
+  strip4.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+  strip4.show();
 }
 
 void loop() {
-  fsrValue1 = analogRead(fsrPin1);
-  fsrValue2 = analogRead(fsrPin2);
+//  fsrValue1 = analogRead(fsrPin1);
   heValue1 = digitalRead(hePin1);
-  Serial.println("fsr sensor 1: " + fsrValue1); 
+  heValue2 = digitalRead(hePin2);
+  heValue3 = digitalRead(hePin3);
+  heValue4 = digitalRead(hePin4);
+//  Serial.println("he sensor 1: " + heValue1); 
+//  Serial.println("he sensor 2: " + heValue2); 
+//  Serial.println("he sensor 3: " + heValue3); 
+//  Serial.println("he sensor 4: " + heValue4); 
   delay(10);
-  Serial.println("fsr sensor 2: " + fsrValue2); 
-  delay(10);
-  Serial.println("he sensor 1: " + heValue1); 
-  delay(10);
-  if ((fsrValue1 > 100 || fsrValue2 > 100) && heValue1){
-    rainbow(0);
+  if (heValue1 && heValue2 && heValue3 && heValue4){
+    rainbow(10);
   }
-  if (fsrValue1 > 100 || fsrValue2 > 100){
-    colorWipe(strip.Color(0,   255,   0), 50);
+  if (heValue1){
+    colorWipe(strip1.Color(0,   255,   0), 50);
   } else { 
-    colorWipe(strip.Color(255,   0,   0), 50);
+    colorWipe(strip1.Color(255,   0,   0), 50);
   }
+  if (heValue2){
+    colorWipe(strip1.Color(0,   255,   0), 50);
+  } else { 
+    colorWipe(strip1.Color(255,   0,   0), 50);
+  }
+  if (heValue3){
+    colorWipe(strip1.Color(0,   255,   0), 50);
+  } else { 
+    colorWipe(strip1.Color(255,   0,   0), 50);
+  }
+  if (heValue4){
+    colorWipe(strip1.Color(0,   255,   0), 50);
+  } else { 
+    colorWipe(strip1.Color(255,   0,   0), 50);
+  }
+  
 }
 
 
@@ -51,7 +76,7 @@ void rainbow(int wait) {
   // Color wheel has a range of 65536 but it's OK if we roll over, so
   // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
   // means we'll make 5*65536/256 = 1280 passes through this outer loop:
-  for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
+  for(long firstPixelHue = 0; firstPixelHue < 1*65536; firstPixelHue += 256) {
     for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
       // Offset pixel hue by an amount to make one full revolution of the
       // color wheel (range of 65536) along the length of the strip
