@@ -10,11 +10,18 @@
 //  
 //  state = digitalRead(hallSensorPin);
 //  Serial.println(state);
-//  if (state == LOW) {        
-//    digitalWrite(ledPin, HIGH);  
-//  } 
-//  else {
-//    digitalWrite(ledPin, LOW); 
-//  }
+////  if (state == LOW) {        
+////    colorWipe(strip.Color(0,   255,   0), 50); 
+////  } 
+////  else {
+////    colorWipe(strip.Color(0,   0,   0), 50);
+////  }
 //
 //}
+//
+////void colorWipe(uint32_t color, int wait) {
+////  for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
+////    strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
+////    strip.show();                         
+////  }
+////}
