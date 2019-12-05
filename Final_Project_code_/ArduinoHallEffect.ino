@@ -1,3 +1,4 @@
+//#include <Adafruit_NeoPixel.h>
 //int hallSensorPin = 2;     
 //int ledPin =  13;    
 //int state = 0;          
